@@ -3,7 +3,7 @@
 ## Context
 
 Initial backend scaffold for a multi-producer marketplace (producers list products; customers place orders).
-Based on the case study requirements for product listings, browsing, and order handling. :contentReference[oaicite:0]{index=0}
+Based on the case study requirements for product listings, browsing, and order handling.
 
 ## Sprint 1 Goal
 
@@ -22,16 +22,50 @@ Deliver a working Django REST API foundation: core models + CRUD endpoints + adm
 - Docker support (Dockerfile + docker-compose)
 - SQLite database with local persistence
 
-## How to run locally
+## Running the Project Locally
 
-```bash
+1. Clone the repository:
+
+git clone <repository-url>
+cd bristol-food-marketplace
+
+2. Create a virtual environment:
+
 python -m venv .venv
-# activate venv...
+
+3. Activate the environment
+
+Windows:
+.venv\Scripts\activate
+
+Mac/Linux:
+source .venv/bin/activate
+
+4. Install dependencies:
+
 pip install -r requirements.txt
+
+5. Apply database migrations:
+
 python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver 
-```
+
+6. Run the development server:
+
+python manage.py runserver
+
+The API will be available at:
+
+http://127.0.0.1:8000/api/
+
+## Running with Docker
+
+If Docker Desktop is installed, the project can be started using:
+
+docker compose up --build
+
+The application will then be available at:
+
+http://localhost:8000/api/
 
 ## API Endpoints & Permissions
 
