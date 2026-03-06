@@ -67,6 +67,17 @@ The application will then be available at:
 
 http://localhost:8000/api/
 
+## Logging into the API
+
+The Django REST browsable API supports login via:
+
+http://127.0.0.1:8000/api-auth/login/
+
+Log in using a Django user account.
+
+Staff/Admin users will be able to create producers and products.
+Regular users can browse products and create orders.
+
 ## API Endpoints & Permissions
 
 ### Producers
@@ -102,17 +113,11 @@ http://localhost:8000/api/
 - No automated tests implemented yet
 - API versioning not yet introduced
 
-## Sprint 2 plan
+## Sprint 2 Plan
 
-- Authentication + roles
-- Filtering/search for products + categories
-- Inventory rules (availability windows)
-- Start modelling multi-vendor order splitting / commission
+- Improve order ownership (users should only see their own orders)
+- Add pagination for product listings
+- Introduce API versioning
+- Implement product categories and improved filtering
+- Begin modelling multi-vendor order splitting / commission logic
 
-## Team & Contribution Note
-
-Initial attempts were made to coordinate Sprint 1 work with assigned group members. 
-At the time of submission, no confirmed collaborative contributions were received.
-
-To avoid missing the sprint deadline, the current implementation was developed independently. 
-If group collaboration resumes, contributions will be tracked via version control.
