@@ -121,3 +121,8 @@ Regular users can browse products and create orders.
 - Implement product categories and improved filtering
 - Begin modelling multi-vendor order splitting / commission logic
 
+## Important
+
+Make sure to select the correct Python interpreter in VS Code:
+
+.venv\Scripts\python.exe
