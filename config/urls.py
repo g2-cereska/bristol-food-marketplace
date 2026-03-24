@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin 
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
-    path("", RedirectView.as_view(url="/api/", permanent=False)),
+    path("", RedirectView.as_view(url="/shop/", permanent=False)),
+    path("shop/", TemplateView.as_view(template_name="shop.html"), name="shop"),
     path("admin/", admin.site.urls),
     path("api/", include("marketplace.urls")),
     path("api-auth/", include("rest_framework.urls")),

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shop | Local Food Marketplace{% endblock %}
+
+{% block content %}
+<main class="shop-layout">
+    <aside class="panel">
+        <h2>Categories</h2>
+        <ul id="categories" class="category-list"></ul>
+    </aside>
+
+    <section class="products-area">
+        <div class="topbar">
+            <div>
+                <h2 id="current-category-title">All Products</h2>
+                <p class="muted">Browse and add local products to your cart</p>
+            </div>
+            <input
+                type="text"
+                id="search"
+                class="search-box"
+                placeholder="Search products..."
+            >
+        </div>
+
+        <div id="products" class="products-grid"></div>
+    </section>
+
+    <aside class="panel">
+        <h2>Cart</h2>
+        <div id="cart-items"></div>
+        <p><strong>Total:</strong> £<span id="cart-total">0.00</span></p>
+        <button id="checkout-btn">Checkout</button>
+        <button id="clear-cart-btn" type="button">Clear Cart</button>
+        <div id="checkout-message" class="muted cart-message"></div>
+    </aside>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/shop.js' %}"></script>
+{% endblock %}

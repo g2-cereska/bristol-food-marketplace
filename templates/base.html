@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Local Food Marketplace{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/shop.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Local Food Marketplace</h1>
+        <p>Browse local produce by category</p>
+    </header>
+
+    {% block content %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

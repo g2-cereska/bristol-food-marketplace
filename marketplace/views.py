@@ -2,7 +2,7 @@ from rest_framework import filters, status, viewsets
 from rest_framework.permissions import BasePermission, SAFE_METHODS, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
-from .models import Producer, Product, Order, Category
+from .models import Producer, Product, ProductBatch, Order, Category
 from .serializers import (
     ProducerSerializer,
     ProductSerializer,
@@ -31,7 +31,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.select_related("producer", "category").all().order_by("id")
     serializer_class = ProductSerializer
     permission_classes = [IsStaffOrReadOnly]
     filter_backends = [filters.SearchFilter]
@@ -43,6 +42,9 @@ class ProductViewSet(viewsets.ModelViewSet):
 
         if category_id:
             queryset = queryset.filter(category_id=category_id)
+
+        if not self.request.user.is_staff:
+            queryset = [p for p in queryset if p.is_available]
 
         return queryset
 

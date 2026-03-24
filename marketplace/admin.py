@@ -1,41 +1,36 @@
 from django.contrib import admin
-from .models import Producer, Product, Order, OrderItem, Category
+from .models import Producer, Category, Product, ProductBatch, Order, OrderItem, OrderItemAllocation
 
 
-class OrderItemInline(admin.TabularInline):
-    model = OrderItem
-    extra = 0
-
-
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ("id", "customer", "status", "total_amount", "created_at")
-    list_filter = ("status", "created_at")
-    search_fields = ("customer__username",)
-    inlines = [OrderItemInline]
+class ProductBatchInline(admin.TabularInline):
+    model = ProductBatch
+    extra = 1
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "producer", "category", "price", "availability_date")
-    list_filter = ("producer", "category", "availability_date")
+    list_display = ("name", "producer", "category", "price", "is_active")
+    list_filter = ("category", "producer", "is_active")
     search_fields = ("name", "description")
+    inlines = [ProductBatchInline]
 
 
-@admin.register(Producer)
-class ProducerAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "email", "postcode")
-    search_fields = ("name", "email", "postcode")
+@admin.register(ProductBatch)
+class ProductBatchAdmin(admin.ModelAdmin):
+    list_display = (
+        "batch_code",
+        "product",
+        "quantity_available",
+        "expiry_date",
+        "harvest_date",
+        "is_approved",
+    )
+    list_filter = ("is_approved", "expiry_date", "product__category")
+    search_fields = ("batch_code", "product__name")
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")
-    search_fields = ("name",)
-
-
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ("id", "order", "product", "quantity", "unit_price", "line_total")
-    list_filter = ("product",)
-    search_fields = ("product__name",)
+admin.site.register(Producer)
+admin.site.register(Category)
+admin.site.register(Order)
+admin.site.register(OrderItem)
+admin.site.register(OrderItemAllocation)
